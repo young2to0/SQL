@@ -3,16 +3,16 @@ SELECT name
 FROM customer
 WHERE  NOT custid = (SELECT custid FROM customer WHERE name='박지성') 
 AND custid IN (SELECT orders.custid
-				       FROM book INNER JOIN orders
+	       FROM book INNER JOIN orders
                     ON book.bookid=orders.bookid
                 WHERE publisher IN (SELECT publisher
-									                  FROM book
-									                  WHERE bookid IN (SELECT bookid
-												                             FROM orders
-                                                    WHERE custid=(SELECT custid
-                                                                  FROM customer
-                                                                  WHERE name='박지성'))));
-                                                                  
+				  FROM book
+				  WHERE bookid IN (SELECT bookid
+						   FROM orders
+						   WHERE custid=(SELECT custid
+							         FROM customer
+							         WHERE name='박지성'))));
+
 -- 두 개 이상의 서로 다른 출판사에서 도서를 구매한 고객의 이름
 SELECT name
 FROM customer
